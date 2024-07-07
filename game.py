@@ -132,7 +132,10 @@ if __name__ == "__main__":
     print(game)
     while True:
         if not game.move(int(input("请输入移动方向："))):
+            print("无法移动")
+            continue
+        print(game)
+        if game.is_over():
             print("游戏结束")
             break
-        print(game)
         print(game.score)
