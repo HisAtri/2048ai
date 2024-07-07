@@ -56,7 +56,7 @@ class Game:
                     search_x += 1
 
     def count_score(self) -> int:
-        # 统计棋盘上所有元素的幂指数之和
+        # 统计棋盘上所有元素的幂指数之和，即棋盘分数
         return sum([2 ** i for i in self.board.flatten()])
 
     def element_left(self, x_index: int, y_index: int, moved: bool = False) -> bool:
@@ -115,6 +115,16 @@ class Game:
         new = Game(self.width, self.height)
         new.set_board(self.board.copy())
         return new
+
+    def is_over(self) -> bool:
+        # 如果有0，则游戏未结束
+        if 0 in self.board.flatten():
+            return False
+        else:
+            for play in range(4):
+                if self.copy().move(play):
+                    return False
+        return True
 
 
 if __name__ == "__main__":
